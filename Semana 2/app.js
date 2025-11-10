@@ -21,8 +21,23 @@ let tentativas = 1;
 //para evitar repetição de codigo, podemos isolar numa função para executar o mesmo que foi executado acima.
 function exibirTextoNaTela(tag, texto) {
     let campo = document.querySelector(tag);
-campo.innerHTML = texto;
+    campo.innerHTML = texto;
+    responsiveVoice.speak(texto, 'Brazilian Portuguese Female', {rate:1.2});
 }
+
+//caso dê erro podemos usar o códgio responsiveVoice.speak é possivel usar seguinte código no lugar:
+/*function exibirTextoNaTela(tag, texto) {
+    let campo = document.querySelector(tag);
+    campo.innerHTML = texto;
+    if ('speechSynthesis' in window) {
+        let utterance = new SpeechSynthesisUtterance(texto);
+        utterance.lang = 'pt-BR'; 
+        utterance.rate = 1.2; 
+        window.speechSynthesis.speak(utterance); 
+    } else {
+        console.log("Web Speech API não suportada neste navegador.");
+    }
+}*/
 
 function exibirMensagemInicial() {
     exibirTextoNaTela('h1', 'Jogo do número secreto');
@@ -35,6 +50,8 @@ exibirMensagemInicial();
 //função trecho de codigo que tem alguma responsabilidade, que é responsável por algo da página
 function verificarChute() {
     let chute = document.querySelector('input').value;
+    //tentativas = tentativas + !; é o mesmo que:
+    tentativas++;
 
     if  (chute == numeroSecreto) {
         exibirTextoNaTela('h1', 'Acertou!');
@@ -47,8 +64,6 @@ function verificarChute() {
             exibirTextoNaTela('p', 'O número secreto é menor');
         } else {
             exibirTextoNaTela('p', 'O número secreto é maior');
-            //tentativas = tentativas + !; é o mesmo que:
-            tentativas ++;
             //limpar o campo após erro do numero
             limparCampo()
         } 
@@ -74,7 +89,7 @@ function gerarNumeroAleatorio() {
 };
 
 function limparCampo() {
-    chute = document.querySelector('input');
+    let chute = document.querySelector('input');
     chute.value = '';
 }
 
