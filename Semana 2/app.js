@@ -7,10 +7,16 @@
 //let paragrafo = document.querySelector('p');
 //paragrafo.innerHTML = 'Escolha um número entre 1 e 10';
 
+//lista para nao repetir numeros sorteados
+let listaDeNumerosSorteados = [];
+
+let numeroLimite = 10;
+
 //criando a variação para chamar o numero aleatorio
 let numeroSecreto = gerarNumeroAleatorio();
 //para chamar o numero de tentativas do usuario
 let tentativas = 1;
+
 
 //para evitar repetição de codigo, podemos isolar numa função para executar o mesmo que foi executado acima.
 function exibirTextoNaTela(tag, texto) {
@@ -51,7 +57,20 @@ function verificarChute() {
 
 //sortear numeros
 function gerarNumeroAleatorio() {
-    return parseInt(Math.random() * 10 + 1);
+    let numeroEscolhido = parseInt(Math.random() * numeroLimite + 1);
+    let quantidadeElementosNaLista = listaDeNumerosSorteados.length;
+
+    if (quantidadeElementosNaLista == numeroLimite) {
+        listaDeNumerosSorteados = [];
+    }
+
+    if(listaDeNumerosSorteados.includes(numeroEscolhido)){
+        return gerarNumeroAleatorio();
+    } else {
+        listaDeNumerosSorteados.push(numeroEscolhido);
+        console.log(listaDeNumerosSorteados);
+        return numeroEscolhido;
+    }
 };
 
 function limparCampo() {
@@ -65,7 +84,7 @@ function reiniciarJogo() {
     tentativas = 1;
     exibirMensagemInicial();
     document.getElementById('reiniciar').setAttribute('disabled', true);
-}
+} 
 
 //imput = entrada do usuário
 // = atribui um valor == compara um valor
