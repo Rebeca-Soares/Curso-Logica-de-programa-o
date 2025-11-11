@@ -4,9 +4,20 @@ function sortear(){
     let de = parseInt(document.getElementById('de').value);
     let ate = parseInt(document.getElementById('ate').value);  
 
+
     //Criar um Array
     let sorteados = [];
     let numero;
+
+    if (de >= ate) {
+        alert('Campo "Do número" deve ser inferior ao campo "Até o número". Verifique!');
+        return;
+    }
+
+    if (quantidade > (ate - de + 1)) {
+        alert('Quantidade" deve ser menor ou igual ao intervalo informado no campo "Do número" até o campo "Até o número". Verifique!');
+        return;
+    }
 
     //for cria uma variavel para controlar o loop
     for (let i = 0; i < quantidade; i++){
