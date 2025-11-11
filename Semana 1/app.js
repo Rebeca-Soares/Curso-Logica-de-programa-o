@@ -27,7 +27,7 @@ while (chute != numeroSecreto) {
             alert(`O numero secreto é maior que ${chute}`);
         }
         //tentativas = tentativas + 1; quer dizer o mesmo que:
-        tentativas ++
+        tentativas++
     }
 }
 // operador ternário
