@@ -19,7 +19,8 @@ function sortear(){
         return;
     }
 
-    //for cria uma variavel para controlar o loop
+    //for cria uma variavel para controlar a repetição
+    // for (inicialização; condição; incremento)
     for (let i = 0; i < quantidade; i++){
         numero = obeterNumeroAleatorio(de, ate);
 
